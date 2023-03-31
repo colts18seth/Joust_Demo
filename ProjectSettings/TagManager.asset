@@ -3,14 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Stair
+  - WallRun
+  - Climb
+  - Fly
+  - projectile
+  - Animal
+  - Water
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
+  - NoTouch
+  - 
+  - Player
+  - DynamicPose
   - 
   - 
   - 
@@ -21,21 +32,17 @@ TagManager:
   - 
   - 
   - 
+  - Grabbable
+  - Hand
+  - 
+  - Enemy
   - 
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Item
   - 
   m_SortingLayers:
   - name: Default
