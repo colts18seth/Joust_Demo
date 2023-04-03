@@ -9,6 +9,7 @@ using UnityEngine;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.XR.OpenXR.Input;
 #endif
 
 namespace HurricaneVR.Framework.Core.Player
@@ -17,7 +18,6 @@ namespace HurricaneVR.Framework.Core.Player
     {
         [Header("Settings")]
         public bool CanJump = false;
-
         public bool CanSteerWhileJumping = true;
         public bool CanSprint = true;
         public bool CanCrouch = true;
@@ -125,6 +125,7 @@ namespace HurricaneVR.Framework.Core.Player
         public Rigidbody RigidBody { get; private set; }
         public CharacterController CharacterController { get; private set; }
         public HVRTeleporter Teleporter { get; private set; }
+        public MountHorse MountHorse { get; private set; }
 
         public virtual float CameraHeight
         {
@@ -149,6 +150,9 @@ namespace HurricaneVR.Framework.Core.Player
         public HVRPlayerInputs Inputs { get; private set; }
 
         public Vector3 PreviousPosition { get;  set; }
+        
+        private bool _isMounted;
+        private float _mountHeight;
         
         private Vector3 _previousLeftControllerPosition;
         private Vector3 _previousRightControllerPosition;
@@ -181,6 +185,10 @@ namespace HurricaneVR.Framework.Core.Player
             RigidBody = GetComponent<Rigidbody>();
             CharacterController = GetComponent<CharacterController>();
             Teleporter = GetComponent<HVRTeleporter>();
+            MountHorse = GetComponent<MountHorse>();
+            
+            _mountHeight = MountHorse.MountHeight;
+
             if (Teleporter)
             {
                 _hasTeleporter = true;
@@ -272,13 +280,10 @@ namespace HurricaneVR.Framework.Core.Player
 
         protected virtual void Update()
         {
-            // if (Input.GetKeyDown(KeyCode.Q))
-            // {
-            //     Teleporter.Teleport(transform.position, Quaternion.AngleAxis(90f, Vector3.up) * transform.forward);
-            // }
+            _isMounted = MountHorse.IsMounted;
             CheckCameraCorrection();
             CheckSprinting();
-            //UpdateHeight();
+            UpdateHeight();
             CheckCrouching();
             CameraRig.PlayerControllerYOffset = _crouchOffset;
         }
@@ -385,8 +390,16 @@ namespace HurricaneVR.Framework.Core.Player
 
         protected virtual void UpdateHeight()
         {
-            CharacterController.height = Mathf.Clamp(CameraRig.AdjustedCameraHeight, MinHeight, CameraRig.AdjustedCameraHeight);
-            CharacterController.center = new Vector3(0, CharacterController.height * .5f + CharacterController.skinWidth, 0f);
+            if (!_isMounted)
+            {
+                CharacterController.height = Mathf.Clamp(CameraRig.AdjustedCameraHeight, MinHeight, CameraRig.AdjustedCameraHeight);
+                CharacterController.center = new Vector3(0, CharacterController.height * .5f + CharacterController.skinWidth, 0f);
+                return;
+            }
+            CharacterController.height = _mountHeight;
+            //CharacterController.height = Mathf.Clamp(CameraRig.AdjustedCameraHeight, _mountHeight, _mountHeight);
+            //CharacterController.height = Mathf.Clamp(CameraRig.AdjustedCameraHeight, MinHeight, CameraRig.AdjustedCameraHeight);
+            //CharacterController.center = new Vector3(0, CharacterController.height * .5f + CharacterController.skinWidth, 0f);
         }
 
         protected virtual void HandleHMDMovement()

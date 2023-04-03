@@ -1,5 +1,3 @@
-using HurricaneVR.Framework.ControllerInput;
-using HurricaneVR.Framework.Core.Player;
 using UnityEngine;
 
 public class MountHorse : MonoBehaviour
@@ -8,14 +6,14 @@ public class MountHorse : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject horse;
     [SerializeField] Camera playerHead;
-    [SerializeField] float MountHeight;
-
-    public HVRCameraRig CameraRig;
+    public CharacterController characterController;
+    public float MountHeight;
+    public bool IsMounted = false;
 
     [ContextMenu("Mount Horse")]
     public void MountHorseMethod()
     {
-        CameraRig.CameraYOffset = MountHeight;
+        player.SetActive(false);
 
         var rotationAngleY = mountPosition.rotation.eulerAngles.y - playerHead.transform.rotation.eulerAngles.y;
         player.transform.Rotate(0, rotationAngleY, 0);
@@ -23,6 +21,12 @@ public class MountHorse : MonoBehaviour
         var distanceDiff = mountPosition.position - playerHead.transform.position;
         player.transform.position += distanceDiff;
 
-        player.transform.parent = horse.transform;
+        characterController.height = MountHeight;
+
+        player.transform.SetParent(horse.transform);
+
+        player.SetActive(true);
+
+        IsMounted = true;
     }
 }
