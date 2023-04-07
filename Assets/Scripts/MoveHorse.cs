@@ -16,19 +16,16 @@ public class MoveHorse : MonoBehaviour
         if(MountHorse.IsMounted)
         {
             Controller.MoveSpeed = 0;
-
-            player.transform.position = MountPosition.transform.position;
-
+            Controller.SmoothTurnSpeed = 0;
 
             HorseInput.enabled = true;
-
         }
         else
         {
             HorseInput.enabled = false;
 
-            Controller.MoveSpeed = 1.8f;
-
+            Controller.MoveSpeed = 2f;
+            Controller.SmoothTurnSpeed = 250f;
         }
     }
 }

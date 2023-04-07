@@ -7,6 +7,9 @@ public class ResetView : MonoBehaviour
     public CharacterController CharacterController;
     public MountHorse MountHorse;
     public HVRCameraRig CameraRig;
+    public GameObject player;
+    public Transform mountPosition;
+    public Camera playerHead;
 
     private void Update()
     {
@@ -20,7 +23,11 @@ public class ResetView : MonoBehaviour
     {
         if (MountHorse.IsMounted)
         {
-            MountHorse.MountHorseMethod();
+            var rotationAngleY = mountPosition.rotation.eulerAngles.y - playerHead.transform.rotation.eulerAngles.y;
+            player.transform.Rotate(0, rotationAngleY, 0);
+
+            var distanceDiff = mountPosition.position - playerHead.transform.position;
+            player.transform.position += distanceDiff;
         }
 
         CharacterController.height = Mathf.Clamp(CameraRig.AdjustedCameraHeight, 0.3f, CameraRig.AdjustedCameraHeight);

@@ -2469,7 +2469,7 @@ GameObject:
   - component: {fileID: 8614998053847231037}
   m_Layer: 0
   m_Name: box
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4062,7 +4062,7 @@ GameObject:
   - component: {fileID: 6982834957184955463}
   m_Layer: 8
   m_Name: Waist
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4516,7 +4516,7 @@ GameObject:
   - component: {fileID: 4520975093086806743}
   m_Layer: 0
   m_Name: box
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7960,9 +7960,9 @@ GameObject:
   - component: {fileID: 4949645884462555556}
   - component: {fileID: 735759029144411946}
   - component: {fileID: 1649733326728562067}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerRig
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8211,7 +8211,7 @@ GameObject:
   - component: {fileID: 4442035292382477092}
   m_Layer: 8
   m_Name: PlayerController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8263,10 +8263,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df32767e580c4d24a3d3c9ed3026afd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanJump: 1
+  Horse: {fileID: 0}
+  CanJump: 0
   CanSteerWhileJumping: 1
-  CanSprint: 1
-  CanCrouch: 1
+  CanSprint: 0
+  CanCrouch: 0
   DirectionStyle: 0
   InitialHMDAdjustment: 1
   GroundedLayerMask:
@@ -8278,7 +8279,7 @@ MonoBehaviour:
   InstantAcceleration: 1
   Acceleration: 15
   Deacceleration: 15
-  MoveSpeed: 1.5
+  MoveSpeed: 2
   SprintAcceleration: 20
   RunSpeed: 3.5
   Gravity: 5
@@ -8339,7 +8340,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4949645885169496834}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddcc26ecb5c24116a2b1c03eaeeef771, type: 3}
   m_Name: 
@@ -8507,7 +8508,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4949645885169496834}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f69bcc72f4218bf44a4a7bb55f1efd7d, type: 3}
   m_Name: 
@@ -8544,6 +8545,7 @@ GameObject:
   - component: {fileID: 5174492352930903262}
   - component: {fileID: 9221090404904570490}
   - component: {fileID: 701799789324551658}
+  - component: {fileID: 424001547}
   m_Layer: 8
   m_Name: Camera
   m_TagString: MainCamera
@@ -8674,6 +8676,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c9568b7cab450d9687b8b607c93867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &424001547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4949645885334176960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &4949645885346061061
 GameObject:
   m_ObjectHideFlags: 0

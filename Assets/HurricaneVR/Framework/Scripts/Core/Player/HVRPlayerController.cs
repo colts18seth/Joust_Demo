@@ -16,6 +16,8 @@ namespace HurricaneVR.Framework.Core.Player
 {
     public class HVRPlayerController : MonoBehaviour
     {
+        public GameObject Horse;
+
         [Header("Settings")]
         public bool CanJump = false;
         public bool CanSteerWhileJumping = true;
@@ -185,7 +187,7 @@ namespace HurricaneVR.Framework.Core.Player
             RigidBody = GetComponent<Rigidbody>();
             CharacterController = GetComponent<CharacterController>();
             Teleporter = GetComponent<HVRTeleporter>();
-            MountHorse = GetComponent<MountHorse>();
+            MountHorse = Horse.GetComponent<MountHorse>();
             
             _mountHeight = MountHorse.MountHeight;
 
