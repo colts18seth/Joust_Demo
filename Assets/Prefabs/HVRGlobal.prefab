@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6496376030676863740}
   - component: {fileID: 5292048586872556676}
   - component: {fileID: 3467015189483583949}
+  - component: {fileID: 1269881582}
   m_Layer: 0
   m_Name: HVRGlobal
   m_TagString: Untagged
@@ -612,6 +613,24 @@ MonoBehaviour:
   RightTrackPadDownDeactivated:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1269881582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6628153632425705279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e1eb70722ee24196fe865216e0a44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterController: {fileID: 0}
+  MountHorse: {fileID: 0}
+  CameraRig: {fileID: 0}
+  player: {fileID: 0}
+  mountPosition: {fileID: 0}
+  playerHead: {fileID: 0}
 --- !u!1 &6889805581117783063
 GameObject:
   m_ObjectHideFlags: 0

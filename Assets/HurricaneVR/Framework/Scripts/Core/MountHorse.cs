@@ -27,7 +27,7 @@ public class MountHorse : MonoBehaviour
     {
         if (IsMounted == true) { return; }
 
-        player.SetActive(false);
+        //player.SetActive(false);
 
         var rotationAngleY = mountPosition.rotation.eulerAngles.y - playerHead.transform.rotation.eulerAngles.y;
         player.transform.Rotate(0, rotationAngleY, 0);
@@ -39,7 +39,7 @@ public class MountHorse : MonoBehaviour
 
         player.transform.SetParent(horse.transform);
 
-        player.SetActive(true);
+        //player.SetActive(true);
                      
         IsMounted = true;
     }
