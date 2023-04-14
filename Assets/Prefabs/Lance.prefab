@@ -70,14 +70,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806871751535788573}
-  m_LocalRotation: {x: -0.11652715, y: -0.10437039, z: 0.73572326, w: 0.65896857}
-  m_LocalPosition: {x: 0.8828, y: -0.0009, z: 0.0215}
+  m_LocalRotation: {x: -0.33643606, y: -0.3013372, z: 0.66458863, w: 0.5952551}
+  m_LocalPosition: {x: 0.9257, y: -0.0009, z: 0.0001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 806871750545416790}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -18, z: 96.3}
+  m_LocalEulerAnglesHint: {x: 0, y: -53.7, z: 96.3}
 --- !u!114 &806871751535788568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,11 +209,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ebc937e678155e4d86feeb9248cca97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrabBehaviour: 0
+  GrabBehaviour: 2
   PoseType: 0
   TrackingType: 0
-  HoldType: 1
-  GrabControl: 0
+  HoldType: 0
+  GrabControl: 1
   OverrideGrabTrigger: 0
   GrabTrigger: 0
   RequireLineOfSight: 1
@@ -236,7 +236,7 @@ MonoBehaviour:
   OneHandStrength: {fileID: 0}
   TwoHandStrength: {fileID: 0}
   PullingSettingsOverride: {fileID: 0}
-  HandGrabbedClip: {fileID: 0}
+  HandGrabbedClip: {fileID: 8300000, guid: f651108008a11ef4198deb6ab94131ea, type: 3}
   SocketGrabPoints: []
   Rigidbody: {fileID: 0}
   AutoApplyLayer: 1

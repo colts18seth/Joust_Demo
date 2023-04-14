@@ -49,9 +49,9 @@ public class MountHorse : MonoBehaviour
     {
         if (IsMounted != true) { return; }
 
-        player.transform.parent = null;
+        player.transform.position = mountPosition.transform.position + new Vector3(1, 0.5f, 0);
 
-        player.transform.position = mountPosition.transform.position + new Vector3(mountPosition.localPosition.x + 1, 0, 0);
+        player.transform.parent = null;
 
         IsMounted = false;
     }

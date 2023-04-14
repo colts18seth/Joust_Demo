@@ -94,7 +94,7 @@ namespace MalbersAnimations.Controller
             BoolVar globalSmooth = MTools.GetInstance<BoolVar>("Global Smooth Vertical");
             FloatVar globalTurn = MTools.GetInstance<FloatVar>("Global Turn Multiplier");
 
-            if (useCameraInp != null) useCameraInput.Variable = useCameraInp;
+            //if (useCameraInp != null) useCameraInput.Variable = useCameraInp;
             if (globalSmooth != null) SmoothVertical.Variable = globalSmooth;
             if (globalTurn != null) TurnMultiplier.Variable = globalTurn;
 
