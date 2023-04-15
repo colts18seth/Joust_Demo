@@ -40,7 +40,7 @@ public class MountHorse : MonoBehaviour
         player.transform.SetParent(horse.transform);
 
         //player.SetActive(true);
-                     
+
         IsMounted = true;
     }
 
