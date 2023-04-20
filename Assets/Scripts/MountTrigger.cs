@@ -6,11 +6,23 @@ public class MountTrigger : MonoBehaviour
     private bool _canMount;
     public MountHorse MountHorse;
     public float mountTimer = 0;
+    public float dismountTextTimer = 0;
+    public GameObject mountHorseText;
+    public GameObject dismountHorseText;
+
+    private void Awake()
+    {
+        mountHorseText = GameObject.FindGameObjectWithTag("MountText");
+        dismountHorseText = GameObject.FindGameObjectWithTag("DismountText");
+        mountHorseText.SetActive(false);
+        dismountHorseText.SetActive(false);
+    }
 
     private void Update()
     {
         if (_canMount && !MountHorse.IsMounted)
         {
+            mountHorseText.SetActive(true);
             if (HVRInputManager.Instance.RightController.SecondaryButtonState.Active == true)
             {
                 mountTimer += Time.deltaTime;
@@ -28,11 +40,19 @@ public class MountTrigger : MonoBehaviour
 
         if (MountHorse.IsMounted)
         {
+            dismountTextTimer += Time.deltaTime;
+            dismountHorseText.SetActive(true);
+            if (dismountTextTimer >= 3f)
+            {
+                dismountHorseText.SetActive(false);
+            }
+
             if (HVRInputManager.Instance.RightController.SecondaryButtonState.Active == true)
             {
                 mountTimer += Time.deltaTime;
                 if (mountTimer >= 1f)
                 {
+                    dismountHorseText.SetActive(false);
                     MountHorse.Dismount();
                     mountTimer = 0;
                 }
@@ -56,6 +76,7 @@ public class MountTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            mountHorseText.SetActive(false);
             _canMount = false;
         }
     }

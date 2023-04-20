@@ -11,6 +11,9 @@ TagManager:
   - projectile
   - Animal
   - Water
+  - MountText
+  - DismountText
+  - PlayerPiece
   layers:
   - Default
   - TransparentFX
