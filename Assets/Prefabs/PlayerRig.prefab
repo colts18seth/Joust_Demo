@@ -6574,7 +6574,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!225 &2368446842258580809
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -8265,10 +8265,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Horse: {fileID: 0}
   CanJump: 0
-  CanSteerWhileJumping: 0
+  CanSteerWhileJumping: 1
   CanSprint: 0
   CanCrouch: 0
-  DirectionStyle: 0
+  DirectionStyle: 1
   InitialHMDAdjustment: 1
   GroundedLayerMask:
     serializedVersion: 2
@@ -18384,7 +18384,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!225 &7001692728281545926
 CanvasGroup:
   m_ObjectHideFlags: 0
