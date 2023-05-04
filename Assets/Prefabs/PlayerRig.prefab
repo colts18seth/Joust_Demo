@@ -2666,7 +2666,7 @@ MonoBehaviour:
   SolverVelocityIterations: 10
   ReturnSpeed: 5
   MaxTargetDistance: 0.8
-  MaxDistanceBehaviour: 2
+  MaxDistanceBehaviour: 0
   Anchor: {fileID: 0}
   ArmLength: 0.75
   Target: {fileID: 1058708780580647926}
@@ -2825,7 +2825,7 @@ MonoBehaviour:
   InertiaTensor: {x: 0.02, y: 0.02, z: 0.02}
   MaxAngularVelocity: 0
   MaxDepenetration: 0
-  COMGizmoSize: {x: 0.02, y: 0.02, z: 0.02}
+  COMGizmoSize: {x: 1, y: 1, z: 1}
   LiveUpdate: 0
   ShowCOMGizmo: 0
   Rigidbody: {fileID: 1458109897231352873}
@@ -2842,8 +2842,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AlwaysUpdateJoint: 0
-  CurrentStrength: {fileID: 0}
-  CurrentSettings: {fileID: 0}
+  CurrentStrength: {fileID: 11400000, guid: 1482e8b1adffac04e8efc4fbd58275a6, type: 2}
+  CurrentSettings: {fileID: 11400000, guid: 10b31f17bbe7be94c900be1670865136, type: 2}
   LogStrengthChanges: 0
 --- !u!114 &2670672085057611924
 MonoBehaviour:

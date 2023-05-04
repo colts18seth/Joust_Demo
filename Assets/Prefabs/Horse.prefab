@@ -269,7 +269,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   AgentTransform: {fileID: 2946680360130448604}
-  Editor_Tabs1: 2
+  Editor_Tabs1: 0
 --- !u!114 &8141446466416703001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 7513553553859505530}
   - component: {fileID: 964183659}
   m_Layer: 7
-  m_Name: MountTrigger
+  m_Name: Mount Trigger Object
   m_TagString: Untagged
   m_Icon: {fileID: -2663371497217273435, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -456,8 +456,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5528519, y: 2.325394, z: 2.4487658}
-  m_Center: {x: 0, y: -0.39110756, z: 0.15329075}
+  m_Size: {x: 1.5528519, y: 2.31146, z: 2.4487658}
+  m_Center: {x: -4.0203614e-16, y: -0.38414043, z: 0.15329075}
 --- !u!114 &7513553553859505530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,11 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c28095d83a117647b48772b866cc5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MountHorse: {fileID: 7957111605986510310}
-  mountTimer: 0
-  dismountTextTimer: 0
-  mountHorseText: {fileID: 0}
-  dismountHorseText: {fileID: 0}
+  canMount: 0
 --- !u!1 &4985899401098481007
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +586,7 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 8
     Variable: {fileID: 0}
   Tracks: {fileID: 198000013136168986, guid: 70fe502b33f22f9458eee8b3c5b3925b, type: 3}
   Dust: {fileID: 198000010737321038, guid: f0185de6019ebaa4db45528f37bad8d2, type: 3}
@@ -3088,7 +3084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6265436720910416499
 Transform:
   m_ObjectHideFlags: 0
@@ -3906,7 +3902,7 @@ GameObject:
   - component: {fileID: 7292109279979684804}
   - component: {fileID: 496264101156378066}
   - component: {fileID: 9015025907529710985}
-  - component: {fileID: 7957111605986510310}
+  - component: {fileID: 442135302}
   m_Layer: 7
   m_Name: Horse
   m_TagString: Animal
@@ -3965,7 +3961,7 @@ Rigidbody:
   m_Mass: 400
   m_Drag: 2
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -4451,7 +4447,7 @@ MonoBehaviour:
   SelectedStance: 0
   ShowStateInInspector: 0
   Editor_Tabs1: 0
-  Mode_Tabs1: 0
+  Mode_Tabs1: 1
   Editor_Tabs2: 4
   Ability_Tabs: 0
   Editor_EventTabs: 0
@@ -5470,7 +5466,7 @@ MonoBehaviour:
     ActivationTime: 0
   CloneStates: 1
   NoParent: 1
-  OverrideStartState: {fileID: 0}
+  OverrideStartState: {fileID: 11400000, guid: 7370df9c769c2764381ad7c76eb3d949, type: 2}
   groundLayer:
     UseConstant: 1
     ConstantValue:
@@ -7768,12 +7764,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Horse: {fileID: 7251744463246126428}
   HorseInput: {fileID: 7291463875735732346}
-  MountHorse: {fileID: 7957111605986510310}
+  horseBehavior: {fileID: 442135302}
   MountPosition: {fileID: 8685426816854769410}
   Controller: {fileID: 0}
   player: {fileID: 0}
   Animal: {fileID: 7292029190620776182}
---- !u!114 &7957111605986510310
+  rb: {fileID: 0}
+--- !u!114 &442135302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7782,12 +7779,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7251744463246126428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16a42fc91b233d843b3a99091e53d91e, type: 3}
+  m_Script: {fileID: 11500000, guid: 924b9aafb5b2a634fae57abff2aa6a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mountPosition: {fileID: 8685426816854769410}
   player: {fileID: 0}
-  horse: {fileID: 7251744463246126428}
   playerHead: {fileID: 0}
   characterController: {fileID: 0}
   Controller: {fileID: 0}
@@ -8077,7 +8073,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8758230117717011933}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7025fecf782df864abd3f0f02d345543, type: 3}
   m_Name: 
@@ -8552,7 +8548,7 @@ MonoBehaviour:
     meshes:
     - {fileID: 6263837871644480493}
     - {fileID: 0}
-    Current: 1
+    Current: 0
     OnActiveMesh:
       m_PersistentCalls:
         m_Calls: []
@@ -8561,7 +8557,7 @@ MonoBehaviour:
     meshes:
     - {fileID: 6265436720910416499}
     - {fileID: 0}
-    Current: 1
+    Current: 0
     OnActiveMesh:
       m_PersistentCalls:
         m_Calls: []
@@ -8575,7 +8571,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - Name: Horns
-    Active: 1
+    Active: 0
     meshes:
     - {fileID: 4888075980188755047}
     - {fileID: 8978905076278655944}
@@ -8584,7 +8580,7 @@ MonoBehaviour:
     OnActiveMesh:
       m_PersistentCalls:
         m_Calls: []
-  showMeshesList: 0
+  showMeshesList: 1
   Pinned:
     Name: NameHere
     Active: 1

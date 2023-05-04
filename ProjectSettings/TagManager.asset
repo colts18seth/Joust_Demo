@@ -23,7 +23,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - NoTouch
+  - BrokenLance
   - Horse
   - Player
   - DynamicPose

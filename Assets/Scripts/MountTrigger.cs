@@ -3,63 +3,66 @@ using UnityEngine;
 
 public class MountTrigger : MonoBehaviour
 {
-    private bool _canMount;
-    public MountHorse MountHorse;
-    public float mountTimer = 0;
-    public float dismountTextTimer = 0;
-    public GameObject mountHorseText;
-    public GameObject dismountHorseText;
+    public bool canMount = false;
+
+    private GameObject _dismountHorseText;
+    private GameObject _mountHorseText;
+    private HorseBehavior _horseBehavior;
+    private float _dismountTextTimer = 0;
+    private float _mountTimer = 0;
+    private bool _canMount = false;
 
     private void Awake()
     {
-        mountHorseText = GameObject.FindGameObjectWithTag("MountText");
-        dismountHorseText = GameObject.FindGameObjectWithTag("DismountText");
-        mountHorseText.SetActive(false);
-        dismountHorseText.SetActive(false);
+        _horseBehavior = FindObjectOfType<HorseBehavior>();
+        _mountHorseText = GameObject.FindGameObjectWithTag("MountText");
+        _dismountHorseText = GameObject.FindGameObjectWithTag("DismountText");
+        _mountHorseText.SetActive(false);
+        _dismountHorseText.SetActive(false);
     }
 
     private void Update()
     {
-        if (_canMount && !MountHorse.IsMounted)
+        if (_canMount && !_horseBehavior.IsMounted)
         {
-            mountHorseText.SetActive(true);
+            _mountHorseText.SetActive(true);
             if (HVRInputManager.Instance.RightController.SecondaryButtonState.Active == true)
             {
-                mountTimer += Time.deltaTime;
-                if (mountTimer >= 1f)
+                _mountTimer += Time.deltaTime;
+                if (_mountTimer >= 1f)
                 {
-                    MountHorse.MountHorseMethod();
-                    mountTimer = 0;
+                    _horseBehavior.MountHorseMethod();
+                    _mountTimer = 0;
                 }
             }
-            else if (mountTimer > 0)
+            else if (_mountTimer > 0)
             {
-                mountTimer = 0;
+                _mountTimer = 0;
             }
         }
 
-        if (MountHorse.IsMounted)
+        if (_horseBehavior.IsMounted)
         {
-            dismountTextTimer += Time.deltaTime;
-            dismountHorseText.SetActive(true);
-            if (dismountTextTimer >= 3f)
+            _mountTimer += Time.deltaTime;
+            _dismountHorseText.SetActive(true);
+            if (_mountTimer >= 3f)
             {
-                dismountHorseText.SetActive(false);
+                _dismountHorseText.SetActive(false);
             }
 
             if (HVRInputManager.Instance.RightController.SecondaryButtonState.Active == true)
             {
-                mountTimer += Time.deltaTime;
-                if (mountTimer >= 1f)
+                _dismountTextTimer += Time.deltaTime;
+                if (_dismountTextTimer >= 1f)
                 {
-                    dismountHorseText.SetActive(false);
-                    MountHorse.Dismount();
-                    mountTimer = 0;
+                    _dismountHorseText.SetActive(false);
+                    _horseBehavior.Dismount();
+                    _dismountTextTimer = 0;
                 }
             }
-            else if (mountTimer > 0)
+            else if (_dismountTextTimer > 0)
             {
-                mountTimer = 0;
+                _dismountTextTimer = 0;
             }
         }
     }
@@ -76,8 +79,8 @@ public class MountTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            mountHorseText.SetActive(false);
             _canMount = false;
+            _mountHorseText.SetActive(false);
         }
     }
 }

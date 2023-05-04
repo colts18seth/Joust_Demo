@@ -1,36 +1,32 @@
-using HurricaneVR.Framework.ControllerInput;
-using HurricaneVR.Framework.Core.Player;
 using UnityEngine;
 
 public class ResetView : MonoBehaviour
 {
-    public CharacterController CharacterController;
-    public MountHorse MountHorse;
-    public HVRCameraRig CameraRig;
-    public GameObject player;
     public Transform mountPosition;
-    public Camera playerHead;
+    public GameObject player;
 
-    private void Update()
+    private CharacterController _controller;
+    private HorseBehavior _horseBehavior;
+    private Camera _playerHead;
+
+    private void Awake()
     {
-        if (HVRInputManager.Instance.LeftController.MenuButtonState.JustActivated == true)
-        {
-            ResetViewMethod();
-        }
+        _horseBehavior = FindObjectOfType<HorseBehavior>();
+        _playerHead = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        _controller = FindObjectOfType<CharacterController>();
     }
 
     public void ResetViewMethod()
     {
-        if (MountHorse.IsMounted)
+        if (_horseBehavior.IsMounted)
         {
-            var rotationAngleY = mountPosition.rotation.eulerAngles.y - playerHead.transform.rotation.eulerAngles.y;
+            var rotationAngleY = mountPosition.rotation.eulerAngles.y - _playerHead.transform.rotation.eulerAngles.y;
             player.transform.Rotate(0, rotationAngleY, 0);
 
-            var distanceDiff = mountPosition.position - playerHead.transform.position;
+            var distanceDiff = mountPosition.position - _playerHead.transform.position;
             player.transform.position += distanceDiff;
-        }
 
-        CharacterController.height = Mathf.Clamp(CameraRig.AdjustedCameraHeight, 0.3f, CameraRig.AdjustedCameraHeight);
-        CharacterController.center = new Vector3(0, CharacterController.height * .5f + CharacterController.skinWidth, 0f);
+            _controller.height = _horseBehavior.MountHeight;
+        }
     }
 }

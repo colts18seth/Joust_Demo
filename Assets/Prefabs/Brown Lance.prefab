@@ -896,7 +896,7 @@ GameObject:
   - component: {fileID: 6085570003667753874}
   - component: {fileID: 6085570003667753875}
   - component: {fileID: 6085570003667753877}
-  - component: {fileID: 6085570003667753876}
+  - component: {fileID: 5972171976850033815}
   m_Layer: 0
   m_Name: Brown Lance
   m_TagString: Lance
@@ -1044,14 +1044,14 @@ Rigidbody:
   m_GameObject: {fileID: 6085570003667753873}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 0.05
+  m_Drag: 0
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &6085570003667753876
+--- !u!114 &5972171976850033815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1060,9 +1060,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6085570003667753873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d13a6865552ee8458a38dbc4f3765b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0144894a6277f774a9f562a9d48f2c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lance: {fileID: 3586718108098936372}
-  brokenLanceHandle: {fileID: 2834313216971556789}
   breakDot: 0.95
+  breakSpeed: 5.5

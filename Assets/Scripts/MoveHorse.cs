@@ -7,33 +7,38 @@ public class MoveHorse : MonoBehaviour
 {
     public GameObject Horse;
     public MalbersInput HorseInput;
-    public MountHorse MountHorse;
+    public HorseBehavior horseBehavior;
     public Transform MountPosition;
     public HVRPlayerController Controller;
     public GameObject player;
     public MAnimal Animal;
+    public Rigidbody rb;
+
+    private void Start()
+    {
+        Animal.LockMovement = true;
+    }
 
     void Update()
     {
-        if(MountHorse.IsMounted)
-        {
-            Controller.MoveSpeed = 0;
-            Controller.SmoothTurnSpeed = 0;
-            if(Animal.Sleep == true)
+        if(horseBehavior.IsMounted)
+        {            
+            if(Animal.LockMovement)
             {
-                Animal.Sleep = false;
-            }
-            else
-            {
-                HorseInput.enabled = true;
+                Animal.LockMovement = false;
+                Controller.MoveSpeed = 0;
+                Controller.SmoothTurnSpeed = 0;
             }
         }
         else
         {
-            Animal.Sleep = true;
+            if (!Animal.LockMovement)
+            {
+                Animal.LockMovement = true;
 
-            Controller.MoveSpeed = 2f;
-            Controller.SmoothTurnSpeed = 250f;
+                Controller.MoveSpeed = 2f;
+                Controller.SmoothTurnSpeed = 250f;
+            }
         }
     }
 }

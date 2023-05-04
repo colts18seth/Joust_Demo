@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 5711521927348697811}
   - component: {fileID: 5711521927348697810}
   - component: {fileID: 5711521927348697812}
-  - component: {fileID: 5711521927348697813}
+  - component: {fileID: 7691635197862307213}
   m_Layer: 0
   m_Name: Blue Lance
   m_TagString: Lance
@@ -681,14 +681,14 @@ Rigidbody:
   m_GameObject: {fileID: 5711521927348697808}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 0.05
+  m_Drag: 0
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &5711521927348697813
+--- !u!114 &7691635197862307213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -697,12 +697,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5711521927348697808}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d13a6865552ee8458a38dbc4f3765b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0144894a6277f774a9f562a9d48f2c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lance: {fileID: 8723566202718274606}
-  brokenLanceHandle: {fileID: 226236400933808114}
   breakDot: 0.95
+  breakSpeed: 5.5
 --- !u!1 &5711521928793649448
 GameObject:
   m_ObjectHideFlags: 0
