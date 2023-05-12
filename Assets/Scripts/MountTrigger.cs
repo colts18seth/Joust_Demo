@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MountTrigger : MonoBehaviour
 {
-    public bool canMount = false;
+    public bool canMount => _canMount;
 
     private GameObject _dismountHorseText;
     private GameObject _mountHorseText;

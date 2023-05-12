@@ -6,6 +6,7 @@ public class LanceBehavior : MonoBehaviour
     public float breakDot = 0.95f;
     public float breakSpeed = 5.5f;
     
+    private JoustBehavior _joustBehavior;
     private LanceSpawnerBehavior _spawner;
     private GameObject _fullLance;
     private GameObject _brokenLanceHandle;
@@ -18,6 +19,7 @@ public class LanceBehavior : MonoBehaviour
     private void Awake()
     {
         _spawner = GameObject.Find("LanceSpawner").GetComponent<LanceSpawnerBehavior>();
+        _joustBehavior = GameObject.Find("Global Vars").GetComponent<JoustBehavior>();
 
         // Get rigidbody from Lance
         _rbLance = GetComponent<Rigidbody>();
@@ -47,8 +49,9 @@ public class LanceBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("---------------------- " + collision.gameObject.tag);
         // if lance hits enemy
-        if (collision.gameObject.tag == "Enemy" && !_isInstantiated)
+        if (collision.gameObject.tag.Contains("Enemy") && !_isInstantiated)
         {
             // get direction of enemy armor/shield and lance
             Vector3 collisionNormal = collision.contacts[0].normal;
@@ -70,6 +73,7 @@ public class LanceBehavior : MonoBehaviour
                 _rbLance.ResetCenterOfMass();
                 _spawner.clearDebris(_brokenLanceTip, gameObject);
                 _isInstantiated = true;
+                _joustBehavior.AddScore(collision.gameObject.tag);
             }
             else
             {

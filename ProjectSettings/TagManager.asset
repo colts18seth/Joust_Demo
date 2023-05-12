@@ -16,6 +16,11 @@ TagManager:
   - PlayerPiece
   - Enemy
   - Lance
+  - StartJoust
+  - Enemy 1
+  - Enemy 2
+  - Enemy 3
+  - EndJoust
   layers:
   - Default
   - TransparentFX
