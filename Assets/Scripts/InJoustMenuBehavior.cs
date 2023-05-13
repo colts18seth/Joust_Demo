@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InGameMenuBehavior : MonoBehaviour
+public class InJoustMenuBehavior : MonoBehaviour
 {
-    [SerializeField] private GameObject inGameMenuScreen;
+    [SerializeField] private GameObject inJoustMenuScreen;
     [SerializeField] private GameObject settingsScreen;
+    [SerializeField] private GameManager _gameManager;
     //[SerializeField] private Text snapTurnButtonText;
 
     //private PlayerBehavior _playerBehavior;
@@ -18,13 +19,19 @@ public class InGameMenuBehavior : MonoBehaviour
     public void ToggleMenu()
     {
         _isMenuOpen = !_isMenuOpen;
-        inGameMenuScreen.SetActive(_isMenuOpen);
+        inJoustMenuScreen.SetActive(_isMenuOpen);
         settingsScreen.SetActive(false);
+    }
+
+    public void OnStartClicked()
+    {
+        ToggleMenu();
+        _gameManager.UpdateGameState(GameState.Joust);
     }
 
     public void OnSettingsClicked()
     {
-        inGameMenuScreen.SetActive(false);
+        inJoustMenuScreen.SetActive(false);
         settingsScreen.SetActive(true);
     }
 
@@ -49,7 +56,7 @@ public class InGameMenuBehavior : MonoBehaviour
 
     public void OnSettingsBackClicked()
     {
-        inGameMenuScreen.SetActive(true);
+        inJoustMenuScreen.SetActive(true);
         settingsScreen.SetActive(false);
     }
 }

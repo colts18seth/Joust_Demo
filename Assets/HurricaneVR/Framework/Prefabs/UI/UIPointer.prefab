@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HandSide: 0
   InputModule: {fileID: 0}
-  CurrentUIElement: {fileID: 0}
+  CurrentUIElement: {fileID: 4542351972052472408}
 --- !u!114 &8225820668985924327
 MonoBehaviour:
   m_ObjectHideFlags: 0

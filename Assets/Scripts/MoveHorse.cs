@@ -1,4 +1,4 @@
-using HurricaneVR.Framework.Core.Player;
+/*using HurricaneVR.Framework.Core.Player;
 using MalbersAnimations;
 using MalbersAnimations.Controller;
 using UnityEngine;
@@ -41,4 +41,4 @@ public class MoveHorse : MonoBehaviour
             }
         }
     }
-}
+}*/

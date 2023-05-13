@@ -16,7 +16,7 @@ public class MainMenuBehavior : MonoBehaviour
 
     public void OnStartClicked()
     {
-        GameManager.Instance.UpdateGameState(GameState.Play);
+        GameManager.Instance.UpdateGameState(GameState.FreeRoam);
         mainMenuScreen.SetActive(false);
         settingsScreen.SetActive(false);
     }

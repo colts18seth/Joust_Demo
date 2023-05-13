@@ -21,6 +21,7 @@ TagManager:
   - Enemy 2
   - Enemy 3
   - EndJoust
+  - Button
   layers:
   - Default
   - TransparentFX

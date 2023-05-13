@@ -3,8 +3,9 @@ using UnityEngine;
 
 public enum GameState
 {
-    Start,
-    Play,
+    FreeRoam,
+    MountedFreeRoam,
+    Joust,
     Pause,
     Quit
 }
@@ -30,12 +31,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateGameState(GameState.Start);
+        UpdateGameState(GameState.FreeRoam);
     }
 
     public void UpdateGameState(GameState gameState)
     {
-        if (_state == gameState) { return; }
+        //if (_state == gameState) { return; }
         _state = gameState;
 
         if (gameState == GameState.Quit)

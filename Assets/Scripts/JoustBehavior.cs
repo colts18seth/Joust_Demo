@@ -1,18 +1,21 @@
 using HurricaneVR.Framework.ControllerInput;
 using HurricaneVR.Framework.Core.Player;
 using MalbersAnimations.Controller;
+using System.Collections;
 using UnityEngine;
 
 public class JoustBehavior : MonoBehaviour
 {
+    public GameObject _startJoustText;
+    public bool isJousting => _isJousting;
+    public GameManager _gameManager;
     public int totalPlayerScore;
     public bool canJoust;
-    public GameObject _startJoustText;
 
     //private int _damageDealt;
     //private int _playerHealth;
 
-    [SerializeField] private InGameMenuBehavior _inGameMenuBehavior;
+    [SerializeField] private InJoustMenuBehavior _inJoustMenuBehavior;
     [SerializeField] private StartJoustArea _startJoustArea;
 
     private HorseBehavior _horseBehavior;
@@ -20,7 +23,6 @@ public class JoustBehavior : MonoBehaviour
     //private GameObject _horse;
     private float _startJoustTimer = 0;
     private bool _hasScored = false;
-    public bool isJousting => _isJousting;
     private bool _isJousting = false;
 
     private void Awake()
@@ -51,10 +53,9 @@ public class JoustBehavior : MonoBehaviour
                 if (_startJoustTimer >= 1f)
                 {
                     _isJousting = true;
-                    _inGameMenuBehavior.ToggleMenu();
+                    OpenJoustMenu();
                     _startJoustText.SetActive(false);
                     _startJoustTimer = 0;
-                    _horseBehavior.UpdateJoustRotation();
                 }
             }
             else if (_startJoustTimer > 0)
@@ -62,6 +63,13 @@ public class JoustBehavior : MonoBehaviour
                 _startJoustTimer = 0;
             }
         }
+    }
+
+    private void OpenJoustMenu()
+    {
+        _gameManager.UpdateGameState(GameState.Pause);
+        _inJoustMenuBehavior.ToggleMenu();
+        _horseBehavior.UpdateJoustRotation();
     }
 
     public void AddScore(string tag)
@@ -87,5 +95,16 @@ public class JoustBehavior : MonoBehaviour
             totalPlayerScore += score;
         }
         Debug.Log("Score: " + totalPlayerScore);
+    }
+
+    public IEnumerator ReturnToJoustStart()
+    {
+        yield return new WaitForSeconds(3f);
+        _gameManager.UpdateGameState(GameState.Pause);
+        _screenFader.Fade(1, 5);
+
+        yield return new WaitForSeconds(1f);
+        OpenJoustMenu();
+        _screenFader.Fade(0, 5);
     }
 }

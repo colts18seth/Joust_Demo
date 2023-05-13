@@ -453,13 +453,37 @@ MonoBehaviour:
       m_Calls: []
   RightSecondaryActivated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MountHorse, HurricaneVR.Framework
+        m_MethodName: MountHorseMethod
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   RightSecondaryDeactivated:
     m_PersistentCalls:
       m_Calls: []
   LeftMenuActivated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1269881582}
+        m_TargetAssemblyTypeName: ResetView, Assembly-CSharp
+        m_MethodName: ResetViewMethod
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   LeftMenuDeactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -625,12 +649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5e1eb70722ee24196fe865216e0a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterController: {fileID: 0}
-  MountHorse: {fileID: 0}
-  CameraRig: {fileID: 0}
-  player: {fileID: 0}
   mountPosition: {fileID: 0}
-  playerHead: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &6889805581117783063
 GameObject:
   m_ObjectHideFlags: 0

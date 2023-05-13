@@ -33,9 +33,9 @@ public class LanceBehavior : MonoBehaviour
 
         _fullLance = childObjects[0];
 
-        // Get random broken from childObjects between 1 and childcount - 1
-        // (don't want full lance which is 0 or Grabpoints which is last in the list)
-        _brokenLanceHandle = childObjects[Random.Range(1, childObjects.Count - 1)];
+        // Get random broken from childObjects between 1 and childcount - 2
+        // (don't want full lance which is 0 or Grabpoints or Button Interactor which are the last two in the list)
+        _brokenLanceHandle = childObjects[Random.Range(1, childObjects.Count - 2)];
         childObjects.Clear();
         foreach (Transform child in _brokenLanceHandle.GetComponentInChildren<Transform>())
         {
@@ -49,7 +49,6 @@ public class LanceBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("---------------------- " + collision.gameObject.tag);
         // if lance hits enemy
         if (collision.gameObject.tag.Contains("Enemy") && !_isInstantiated)
         {
@@ -74,6 +73,7 @@ public class LanceBehavior : MonoBehaviour
                 _spawner.clearDebris(_brokenLanceTip, gameObject);
                 _isInstantiated = true;
                 _joustBehavior.AddScore(collision.gameObject.tag);
+                StartCoroutine(_joustBehavior.ReturnToJoustStart());
             }
             else
             {

@@ -488,7 +488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c28095d83a117647b48772b866cc5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMount: 0
 --- !u!1 &4985899401098481007
 GameObject:
   m_ObjectHideFlags: 0
@@ -3901,7 +3900,6 @@ GameObject:
   - component: {fileID: 7627745690067882109}
   - component: {fileID: 7292109279979684804}
   - component: {fileID: 496264101156378066}
-  - component: {fileID: 9015025907529710985}
   - component: {fileID: 442135302}
   m_Layer: 7
   m_Name: Horse
@@ -3961,11 +3959,11 @@ Rigidbody:
   m_Mass: 400
   m_Drag: 2
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &3878464764615461707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4030,7 +4028,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7251744463246126428}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12fd74a46159fd04b9a3d3d643cdb50f, type: 3}
   m_Name: 
@@ -5554,7 +5552,7 @@ MonoBehaviour:
     Variable: {fileID: 0}
   AlignLoop:
     UseConstant: 1
-    ConstantValue: 1
+    ConstantValue: 5
     Variable: {fileID: 0}
   DebrisTag:
     UseConstant: 1
@@ -7750,26 +7748,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &9015025907529710985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7251744463246126428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9b39240451c89c47a2c6b1da731906f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Horse: {fileID: 7251744463246126428}
-  HorseInput: {fileID: 7291463875735732346}
-  horseBehavior: {fileID: 442135302}
-  MountPosition: {fileID: 8685426816854769410}
-  Controller: {fileID: 0}
-  player: {fileID: 0}
-  Animal: {fileID: 7292029190620776182}
-  rb: {fileID: 0}
 --- !u!114 &442135302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7782,12 +7760,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924b9aafb5b2a634fae57abff2aa6a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mountPosition: {fileID: 8685426816854769410}
-  player: {fileID: 0}
-  playerHead: {fileID: 0}
   characterController: {fileID: 0}
   Controller: {fileID: 0}
+  joustBehavior: {fileID: 0}
+  mountPosition: {fileID: 8685426816854769410}
   CameraRig: {fileID: 0}
+  horseTarget: {fileID: 0}
+  leftHand: {fileID: 0}
+  player: {fileID: 0}
+  playerHead: {fileID: 0}
+  _animal: {fileID: 7292029190620776182}
   MountHeight: 3.5
   IsMounted: 0
 --- !u!1 &7617030010970768600
