@@ -1,5 +1,4 @@
 using HurricaneVR.Framework.ControllerInput;
-using HurricaneVR.Framework.Core.Player;
 using MalbersAnimations.Controller;
 using System.Collections;
 using UnityEngine;
@@ -7,10 +6,12 @@ using UnityEngine;
 public class JoustBehavior : MonoBehaviour
 {
     public GameObject _startJoustText;
-    public bool isJousting => _isJousting;
     public GameManager _gameManager;
+    public MAnimal animal;
+    public bool isJousting => _isJousting;
     public int totalPlayerScore;
     public bool canJoust;
+    public FadeBehavior fadeBehavior;
 
     //private int _damageDealt;
     //private int _playerHealth;
@@ -19,7 +20,6 @@ public class JoustBehavior : MonoBehaviour
     [SerializeField] private StartJoustArea _startJoustArea;
 
     private HorseBehavior _horseBehavior;
-    private HVRScreenFade _screenFader;
     //private GameObject _horse;
     private float _startJoustTimer = 0;
     private bool _hasScored = false;
@@ -31,14 +31,6 @@ public class JoustBehavior : MonoBehaviour
         _startJoustText = GameObject.FindGameObjectWithTag("StartJoust");
         _startJoustText.SetActive(false);
         //_horse = GameObject.FindGameObjectWithTag("Animal");
-        if (!_screenFader)
-        {
-            var finder = FindObjectOfType<HVRGlobalFadeFinder>();
-            if (finder)
-            {
-                _screenFader = finder.gameObject.GetComponent<HVRScreenFade>();
-            }
-        }
     }
 
     private void Update()
@@ -65,11 +57,11 @@ public class JoustBehavior : MonoBehaviour
         }
     }
 
-    private void OpenJoustMenu()
+    public void OpenJoustMenu()
     {
         _gameManager.UpdateGameState(GameState.Pause);
-        _inJoustMenuBehavior.ToggleMenu();
         _horseBehavior.UpdateJoustRotation();
+        _inJoustMenuBehavior.ToggleMenu();
     }
 
     public void AddScore(string tag)
@@ -97,14 +89,14 @@ public class JoustBehavior : MonoBehaviour
         Debug.Log("Score: " + totalPlayerScore);
     }
 
-    public IEnumerator ReturnToJoustStart()
+    public IEnumerator StopTilt()
     {
-        yield return new WaitForSeconds(3f);
-        _gameManager.UpdateGameState(GameState.Pause);
-        _screenFader.Fade(1, 5);
-
+        yield return new WaitForSeconds(2.5f);
+        animal.LockMovement = true;
+        yield return new WaitForSeconds(.5f);
+        fadeBehavior.FadeOut();
         yield return new WaitForSeconds(1f);
         OpenJoustMenu();
-        _screenFader.Fade(0, 5);
+        fadeBehavior.FadeIn();
     }
 }

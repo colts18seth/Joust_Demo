@@ -1,3 +1,4 @@
+using HurricaneVR.Framework.Core.Player;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -71,9 +72,11 @@ public class LanceBehavior : MonoBehaviour
                 _fullLance.SetActive(false);
                 _rbLance.ResetCenterOfMass();
                 _spawner.clearDebris(_brokenLanceTip, gameObject);
+                StartCoroutine(_joustBehavior.StopTilt());
+                //_screenFader.Fade(1f, 1f);
+                //_joustBehavior.OpenJoustMenu();
                 _isInstantiated = true;
                 _joustBehavior.AddScore(collision.gameObject.tag);
-                StartCoroutine(_joustBehavior.ReturnToJoustStart());
             }
             else
             {

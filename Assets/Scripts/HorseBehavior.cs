@@ -14,6 +14,7 @@ public class HorseBehavior : MonoBehaviour
     public GameObject leftHand;
     public GameObject player;
     public Camera playerHead;
+    public Rigidbody rb;
     public MAnimal _animal;
     public float MountHeight;
     public bool IsMounted = false;
@@ -74,13 +75,7 @@ public class HorseBehavior : MonoBehaviour
 
         leftHand.SetActive(false);
 
-        var rotationAngleY = mountPosition.rotation.eulerAngles.y - playerHead.transform.rotation.eulerAngles.y;
-        player.transform.Rotate(0, rotationAngleY, 0);
-
-        var distanceDiff = mountPosition.position - playerHead.transform.position;
-        player.transform.position += distanceDiff;
-
-        characterController.height = MountHeight;
+        MountPositionandRotation();
 
         player.transform.SetParent(gameObject.transform);
     }
@@ -107,6 +102,18 @@ public class HorseBehavior : MonoBehaviour
         Vector3 direction = horseTarget.position - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = targetRotation;
+        MountPositionandRotation();
+    }
+
+    public void MountPositionandRotation()
+    {
+        var rotationAngleY = mountPosition.rotation.eulerAngles.y - playerHead.transform.rotation.eulerAngles.y;
+        player.transform.Rotate(0, rotationAngleY, 0);
+
+        var distanceDiff = mountPosition.position - playerHead.transform.position;
+        player.transform.position += distanceDiff;
+
+        characterController.height = MountHeight;
     }
 
     private void UpdateHeight()

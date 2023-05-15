@@ -11,6 +11,7 @@ namespace HurricaneVR.Framework.Core.Player
         public float Speed = 5f;
         public float FadeInSpeed = 5f;
         public float FadeOutSpeed = 5f;
+        public bool FadeDone = false;
 
         public UnityEvent FadeStart = new UnityEvent();
         public UnityEvent FadeEnd = new UnityEvent();
@@ -48,6 +49,7 @@ namespace HurricaneVR.Framework.Core.Player
 
         protected virtual IEnumerator FadeRoutine(float fadeLevel, float speed)
         {
+            FadeDone = false;
             FadeStart.Invoke();
 
             fadeLevel = Mathf.Clamp(fadeLevel, 0f, 1f);
@@ -76,6 +78,7 @@ namespace HurricaneVR.Framework.Core.Player
             }
 
             FadeEnd.Invoke();
+            FadeDone = true;
         }
     }
 }
