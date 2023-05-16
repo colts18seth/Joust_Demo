@@ -463,7 +463,7 @@ namespace HurricaneVR.Framework.ControllerInput
         {
             if (_applicationExiting)
                 return;
-            Debug.Log($"disconnected {device.name},{device.manufacturer}");
+            //Debug.Log($"disconnected {device.name},{device.manufacturer}");
             UpdateDeviceInformation(device);
         }
 
@@ -471,7 +471,7 @@ namespace HurricaneVR.Framework.ControllerInput
         {
             if (_applicationExiting)
                 return;
-            Debug.Log($"connected {device.name},{device.manufacturer}");
+            //Debug.Log($"connected {device.name},{device.manufacturer}");
             //FYI: steamvr causes this to fire even if the controller is off if the controller was previously on.
             UpdateDeviceInformation(device);
         }
@@ -480,7 +480,7 @@ namespace HurricaneVR.Framework.ControllerInput
         {
             if (_applicationExiting)
                 return;
-            Debug.Log($"config changed {device.name},{device.manufacturer}");
+            //Debug.Log($"config changed {device.name},{device.manufacturer}");
             UpdateDeviceInformation(device);
         }
 
@@ -602,7 +602,7 @@ namespace HurricaneVR.Framework.ControllerInput
 
             if (wasNone && CurrentSDK != InputSDK.None)
             {
-                Debug.Log($"InputSDK : {CurrentSDK}");
+                //Debug.Log($"InputSDK : {CurrentSDK}");
             }
 
             switch (controllerType)
@@ -898,7 +898,7 @@ namespace HurricaneVR.Framework.ControllerInput
                 {
                     if (!steamvrFound)
                     {
-                        Debug.LogWarning($"HVR: {OpenVRLoader} active without SteamVR installed or HVR_STEAMVR define set.");
+                        //Debug.LogWarning($"HVR: {OpenVRLoader} active without SteamVR installed or HVR_STEAMVR define set.");
                     }
 
                     CurrentSDK = InputSDK.SteamVR;
@@ -981,9 +981,9 @@ namespace HurricaneVR.Framework.ControllerInput
 #else
             loaders = string.Join(",", XRGeneralSettings.Instance.Manager.loaders.Select(e => e.name));
 #endif
-            Debug.Log($"{XRGeneralSettings.Instance.Manager.automaticLoading}");
-            Debug.Log($"XRGeneralSettings.Instance.Manager.isInitializationComplete {XRGeneralSettings.Instance.Manager.isInitializationComplete}");
-            Debug.Log($"XRPlugin Detected | XRSettings.enabled {XRSettings.enabled} | Loader : {XRPluginLoader} | Loaders Enabled: {loaders}");
+            //Debug.Log($"{XRGeneralSettings.Instance.Manager.automaticLoading}");
+            //Debug.Log($"XRGeneralSettings.Instance.Manager.isInitializationComplete {XRGeneralSettings.Instance.Manager.isInitializationComplete}");
+            //Debug.Log($"XRPlugin Detected | XRSettings.enabled {XRSettings.enabled} | Loader : {XRPluginLoader} | Loaders Enabled: {loaders}");
 
             XRPluginActive = XRSettings.enabled && XRGeneralSettings.Instance.Manager.isInitializationComplete;
 #elif !UNITY_2020_1_OR_NEWER
@@ -1004,12 +1004,12 @@ namespace HurricaneVR.Framework.ControllerInput
         public bool StartXR()
         {
 #if USING_XR_MANAGEMENT
-            Debug.Log($"Attempting to start XR Plugin");
+            //Debug.Log($"Attempting to start XR Plugin");
             XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
             XRPluginLoader = XRGeneralSettings.Instance.Manager.activeLoader?.name ?? "";
             if (!string.IsNullOrEmpty(XRPluginLoader))
             {
-                Debug.Log($"{XRPluginLoader} loader started. Starting subsystems");
+                //Debug.Log($"{XRPluginLoader} loader started. Starting subsystems");
                 XRGeneralSettings.Instance.Manager.StartSubsystems();
                 XRPluginActive = XRSettings.enabled && XRGeneralSettings.Instance.Manager.isInitializationComplete;
                 Initialize();
@@ -1018,7 +1018,7 @@ namespace HurricaneVR.Framework.ControllerInput
             else
             {
                 XRPluginActive = false;
-                Debug.LogWarning($"Failed to start the xr plugin manually");
+                //Debug.LogWarning($"Failed to start the xr plugin manually");
                 return false;
             }
 #else
@@ -1031,7 +1031,7 @@ namespace HurricaneVR.Framework.ControllerInput
         public void StopXR()
         {
 #if USING_XR_MANAGEMENT
-            Debug.Log($"stopping xr plugin");
+            //Debug.Log($"stopping xr plugin");
             if (XRGeneralSettings.Instance && XRGeneralSettings.Instance.Manager &&
                 XRGeneralSettings.Instance.Manager.activeLoader != null && XRGeneralSettings.Instance.Manager.isInitializationComplete)
             {
@@ -1187,15 +1187,15 @@ namespace HurricaneVR.Framework.ControllerInput
 #if USING_XR_MANAGEMENT
             var subsystems = new List<XRInputSubsystem>();
             SubsystemManager.GetInstances<XRInputSubsystem>(subsystems);
-            Debug.Log("Found " + subsystems.Count + " input subsystems.");
+            //Debug.Log("Found " + subsystems.Count + " input subsystems.");
 
-            for (int i = 0; i < subsystems.Count; i++)
-            {
-                if (subsystems[i].TrySetTrackingOriginMode(originFlags))
-                    Debug.Log("Successfully set TrackingOriginMode to Floor");
-                else
-                    Debug.Log("Failed to set TrackingOriginMode to Floor");
-            }
+            //for (int i = 0; i < subsystems.Count; i++)
+            //{
+                //if (subsystems[i].TrySetTrackingOriginMode(originFlags))
+                    //Debug.Log("Successfully set TrackingOriginMode to Floor");
+                //else
+                    //Debug.Log("Failed to set TrackingOriginMode to Floor");
+            //}
 
 #elif !UNITY_2020_1_OR_NEWER
             if (originFlags == TrackingOriginModeFlags.Floor)

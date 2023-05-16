@@ -8,8 +8,8 @@ public class LanceSpawnerBehavior : MonoBehaviour
     
     public void clearDebris(GameObject _brokenLanceTip, GameObject oldLance)
     {
-        Destroy(oldLance, 8f);
-        Destroy(_brokenLanceTip, 8f);
+        Destroy(oldLance, 6f);
+        Destroy(_brokenLanceTip, 6f);
         Instantiate(lance, spawnPoint.transform.position, spawnPoint.transform.rotation);
         //StartCoroutine(InstantiateLance(lance));        
     }

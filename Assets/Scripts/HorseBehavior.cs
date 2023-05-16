@@ -1,6 +1,5 @@
 using HurricaneVR.Framework.Core.Player;
 using MalbersAnimations.Controller;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class HorseBehavior : MonoBehaviour
@@ -37,15 +36,15 @@ public class HorseBehavior : MonoBehaviour
         {
             case GameState.FreeRoam:
                 _animal.LockMovement = true;
+                _animal.LockHorizontalMovement = false;
                 Controller.MoveSpeed = 2f;
                 Controller.SmoothTurnSpeed = 250f;
-                _animal.LockHorizontalMovement = false;
                 break;
             case GameState.MountedFreeRoam:
                 _animal.LockMovement = false;
+                _animal.LockHorizontalMovement = false;
                 Controller.MoveSpeed = 0;
                 Controller.SmoothTurnSpeed = 0;
-                _animal.LockHorizontalMovement = false;
                 break;
             case GameState.Joust:
                 _animal.LockMovement = false;

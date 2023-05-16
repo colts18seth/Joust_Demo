@@ -1,6 +1,7 @@
 using HurricaneVR.Framework.ControllerInput;
 using MalbersAnimations.Controller;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class JoustBehavior : MonoBehaviour
@@ -9,9 +10,13 @@ public class JoustBehavior : MonoBehaviour
     public GameManager _gameManager;
     public MAnimal animal;
     public bool isJousting => _isJousting;
-    public int totalPlayerScore;
     public bool canJoust;
     public FadeBehavior fadeBehavior;
+    public GameObject countdownTextObj;
+    public GameObject tiltNumberObj;
+    public GameObject totalScoreObj;
+    public int totalScore;
+    public int currentTilt;
 
     //private int _damageDealt;
     //private int _playerHealth;
@@ -21,6 +26,9 @@ public class JoustBehavior : MonoBehaviour
 
     private HorseBehavior _horseBehavior;
     //private GameObject _horse;
+    private TextMeshProUGUI _countdownText;
+    private TextMeshProUGUI _tiltNumberText;
+    private TextMeshProUGUI _totalScoreText;
     private float _startJoustTimer = 0;
     private bool _hasScored = false;
     private bool _isJousting = false;
@@ -30,6 +38,9 @@ public class JoustBehavior : MonoBehaviour
         _horseBehavior = FindObjectOfType<HorseBehavior>();
         _startJoustText = GameObject.FindGameObjectWithTag("StartJoust");
         _startJoustText.SetActive(false);
+        _countdownText = countdownTextObj.GetComponent<TextMeshProUGUI>();
+        _tiltNumberText = tiltNumberObj.GetComponent<TextMeshProUGUI>();
+        _totalScoreText = totalScoreObj.GetComponent<TextMeshProUGUI>();
         //_horse = GameObject.FindGameObjectWithTag("Animal");
     }
 
@@ -69,34 +80,52 @@ public class JoustBehavior : MonoBehaviour
         if (!_hasScored)
         {
             _hasScored = true;
-            int score = 0;
 
             if (tag == "Enemy 1")
             {
-                score = 1;
+                totalScore += 1;
             }
             else if (tag == "Enemy 2")
             {
-                score = 2;
+                totalScore += 2;
             }
-            else if (tag == "Enemy 3")
-            {
-                score = 3;
-            }
-
-            totalPlayerScore += score;
+            _totalScoreText.text = totalScore.ToString();
         }
-        Debug.Log("Score: " + totalPlayerScore);
+    } 
+
+    public void handleTiltCount()
+    {
+        currentTilt = currentTilt < 3 ? currentTilt++ : 3;
+        _tiltNumberText.text = "Tilt " + currentTilt.ToString() + "/3";
     }
 
     public IEnumerator StopTilt()
     {
+
         yield return new WaitForSeconds(2.5f);
         animal.LockMovement = true;
         yield return new WaitForSeconds(.5f);
         fadeBehavior.FadeOut();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
+        handleTiltCount();
         OpenJoustMenu();
         fadeBehavior.FadeIn();
+    }
+
+    public IEnumerator CountdownToJoust()
+    {        
+        int countdownValue = 3;
+
+        while (countdownValue > 0)
+        {
+            _countdownText.text = countdownValue.ToString();
+            yield return new WaitForSeconds(1f);
+            countdownValue--;
+        }
+
+        _countdownText.text = "Go!";
+        _gameManager.UpdateGameState(GameState.Joust);
+        yield return new WaitForSeconds(.5f);
+        countdownTextObj.SetActive(false);
     }
 }

@@ -1,15 +1,25 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class InJoustMenuBehavior : MonoBehaviour
 {
-    [SerializeField] private GameObject inJoustMenuScreen;
-    [SerializeField] private GameObject settingsScreen;
+    [SerializeField] private GameObject _inJoustMenuScreen;
+    [SerializeField] private GameObject _settingsScreen;
     [SerializeField] private GameManager _gameManager;
+    public GameObject countdownTextObj;
     //[SerializeField] private Text snapTurnButtonText;
 
     //private PlayerBehavior _playerBehavior;
     private bool _isMenuOpen = false;
+    public JoustBehavior _joustBehavior;
+
+    private void Awake()
+    {
+        _inJoustMenuScreen.SetActive(false);
+        _settingsScreen.SetActive(false);
+        countdownTextObj.SetActive(false);
+    }
 
     /*private void Start()
     {
@@ -19,20 +29,21 @@ public class InJoustMenuBehavior : MonoBehaviour
     public void ToggleMenu()
     {
         _isMenuOpen = !_isMenuOpen;
-        inJoustMenuScreen.SetActive(_isMenuOpen);
-        settingsScreen.SetActive(false);
+        _inJoustMenuScreen.SetActive(_isMenuOpen);
+        _settingsScreen.SetActive(false);
     }
 
     public void OnStartClicked()
     {
         ToggleMenu();
-        _gameManager.UpdateGameState(GameState.Joust);
+        countdownTextObj.SetActive(true);
+        StartCoroutine(_joustBehavior.CountdownToJoust());
     }
 
     public void OnSettingsClicked()
     {
-        inJoustMenuScreen.SetActive(false);
-        settingsScreen.SetActive(true);
+        _inJoustMenuScreen.SetActive(false);
+        _settingsScreen.SetActive(true);
     }
 
     public void OnQuitClicked()
@@ -56,7 +67,7 @@ public class InJoustMenuBehavior : MonoBehaviour
 
     public void OnSettingsBackClicked()
     {
-        inJoustMenuScreen.SetActive(true);
-        settingsScreen.SetActive(false);
+        _inJoustMenuScreen.SetActive(true);
+        _settingsScreen.SetActive(false);
     }
 }

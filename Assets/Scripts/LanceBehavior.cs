@@ -73,8 +73,6 @@ public class LanceBehavior : MonoBehaviour
                 _rbLance.ResetCenterOfMass();
                 _spawner.clearDebris(_brokenLanceTip, gameObject);
                 StartCoroutine(_joustBehavior.StopTilt());
-                //_screenFader.Fade(1f, 1f);
-                //_joustBehavior.OpenJoustMenu();
                 _isInstantiated = true;
                 _joustBehavior.AddScore(collision.gameObject.tag);
             }
