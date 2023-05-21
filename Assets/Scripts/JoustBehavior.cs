@@ -8,6 +8,7 @@ public class JoustBehavior : MonoBehaviour
 {
     public GameObject _startJoustText;
     public GameManager _gameManager;
+    public LanceSpawnerBehavior _lanceSpawnerBehavior;
     public MAnimal animal;
     public bool isJousting => _isJousting;
     public bool canJoust;
@@ -15,23 +16,27 @@ public class JoustBehavior : MonoBehaviour
     public GameObject countdownTextObj;
     public GameObject tiltNumberObj;
     public GameObject totalScoreObj;
+    public GameObject finalScoreObj;
     public int totalScore;
-    public int currentTilt;
+    private int currentTilt = 1;
 
     //private int _damageDealt;
     //private int _playerHealth;
 
     [SerializeField] private InJoustMenuBehavior _inJoustMenuBehavior;
-    [SerializeField] private StartJoustArea _startJoustArea;
+    //public StartJoustArea _startJoustArea;
 
     private HorseBehavior _horseBehavior;
     //private GameObject _horse;
     private TextMeshProUGUI _countdownText;
     private TextMeshProUGUI _tiltNumberText;
     private TextMeshProUGUI _totalScoreText;
+    private TextMeshProUGUI _finalScoreText;
     private float _startJoustTimer = 0;
     private bool _hasScored = false;
     private bool _isJousting = false;
+    private GameObject[] _lances;
+    //public bool _canJoust = false;
 
     private void Awake()
     {
@@ -41,13 +46,14 @@ public class JoustBehavior : MonoBehaviour
         _countdownText = countdownTextObj.GetComponent<TextMeshProUGUI>();
         _tiltNumberText = tiltNumberObj.GetComponent<TextMeshProUGUI>();
         _totalScoreText = totalScoreObj.GetComponent<TextMeshProUGUI>();
+        _finalScoreText = finalScoreObj.GetComponent<TextMeshProUGUI>();
+        //canJoust = StartJoustArea.canJoust;
         //_horse = GameObject.FindGameObjectWithTag("Animal");
     }
 
     private void Update()
-    {
-        canJoust = _startJoustArea.canJoust;
-        if(canJoust && _horseBehavior.IsMounted && !_isJousting)
+    {        
+        if(StartJoustArea.canJoust && _horseBehavior.IsMounted && !_isJousting)
         {
             _startJoustText.SetActive(true);
             if(HVRInputManager.Instance.RightController.PrimaryButtonState.Active == true )
@@ -72,7 +78,14 @@ public class JoustBehavior : MonoBehaviour
     {
         _gameManager.UpdateGameState(GameState.Pause);
         _horseBehavior.UpdateJoustRotation();
-        _inJoustMenuBehavior.ToggleMenu();
+        _inJoustMenuBehavior.ToggleMenu(true);
+    }
+    
+    public void OpenJoustMenuDone()
+    {
+        _gameManager.UpdateGameState(GameState.Pause);
+        _horseBehavior.UpdateJoustRotation();
+        _inJoustMenuBehavior.ToggleMenuDone(true);
     }
 
     public void AddScore(string tag)
@@ -89,27 +102,55 @@ public class JoustBehavior : MonoBehaviour
             {
                 totalScore += 2;
             }
-            _totalScoreText.text = totalScore.ToString();
+            _totalScoreText.text = "Score: " + totalScore.ToString();
         }
     } 
 
+    public void EndTiltWithoutScore()
+    {
+        if (EndJoustArea.endJoust && !_hasScored)
+        {
+            _lances = GameObject.FindGameObjectsWithTag("Lance");
+            _lanceSpawnerBehavior.clearDebris(_lances);
+            _totalScoreText.text = "Score: " + totalScore.ToString();
+            StartCoroutine(StopTilt());
+        }
+    }
+
     public void handleTiltCount()
     {
-        currentTilt = currentTilt < 3 ? currentTilt++ : 3;
+        currentTilt += 1;
+        _tiltNumberText.text = "Tilt " + currentTilt.ToString() + "/3";
+    }
+
+    private void handleJoustDone()
+    {
+        _finalScoreText.text = "Final Score: " + totalScore.ToString();
+        totalScore = 0;
+        _totalScoreText.text = "Score: " + totalScore.ToString();
+        currentTilt = 1;
         _tiltNumberText.text = "Tilt " + currentTilt.ToString() + "/3";
     }
 
     public IEnumerator StopTilt()
     {
-
         yield return new WaitForSeconds(2.5f);
         animal.LockMovement = true;
         yield return new WaitForSeconds(.5f);
         fadeBehavior.FadeOut();
         yield return new WaitForSeconds(1.5f);
         handleTiltCount();
-        OpenJoustMenu();
+        if(currentTilt > 3)
+        {
+            handleJoustDone();
+            OpenJoustMenuDone();
+        }
+        else
+        {
+            OpenJoustMenu();
+        }
         fadeBehavior.FadeIn();
+        _hasScored = false;
     }
 
     public IEnumerator CountdownToJoust()

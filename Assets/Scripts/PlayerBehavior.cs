@@ -1,10 +1,8 @@
-/*using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    [SerializeField] XRRayInteractor[] _teleportationInteractors;
+    /*[SerializeField] XRRayInteractor[] _teleportationInteractors;
     private ActionBasedControllerManager[] _actionBasedControllerManagers;
     private DynamicMoveProvider _dynamicMoveProvider;
     private GrabMoveProvider[] _grabMoveProviders;
@@ -66,5 +64,5 @@ public class PlayerBehavior : MonoBehaviour
         {
             teleportationInteractor.enabled = canMove;
         }
-    }
-}*/
+    }*/
+}

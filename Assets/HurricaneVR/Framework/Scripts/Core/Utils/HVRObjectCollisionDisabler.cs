@@ -42,6 +42,7 @@ namespace HurricaneVR.Framework.Core.Utils
                         foreach (var otherCollider in otherColliders)
                         {
                             Physics.IgnoreCollision(c, otherCollider);
+                            Debug.Log("Ignore: " + otherCollider);
                         }
                     }
                 }

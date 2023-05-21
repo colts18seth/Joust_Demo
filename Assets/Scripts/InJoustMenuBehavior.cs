@@ -1,22 +1,21 @@
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 
 public class InJoustMenuBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject _inJoustMenuScreen;
     [SerializeField] private GameObject _settingsScreen;
+    [SerializeField] private GameObject _inJoustMenuDoneScreen;
     [SerializeField] private GameManager _gameManager;
     public GameObject countdownTextObj;
     //[SerializeField] private Text snapTurnButtonText;
 
     //private PlayerBehavior _playerBehavior;
-    private bool _isMenuOpen = false;
     public JoustBehavior _joustBehavior;
 
     private void Awake()
     {
         _inJoustMenuScreen.SetActive(false);
+        _inJoustMenuDoneScreen.SetActive(false);
         _settingsScreen.SetActive(false);
         countdownTextObj.SetActive(false);
     }
@@ -26,16 +25,43 @@ public class InJoustMenuBehavior : MonoBehaviour
         _playerBehavior = FindObjectOfType<PlayerBehavior>();
     }*/
 
-    public void ToggleMenu()
+    public void ToggleMenu(bool isOpen)
     {
-        _isMenuOpen = !_isMenuOpen;
-        _inJoustMenuScreen.SetActive(_isMenuOpen);
-        _settingsScreen.SetActive(false);
+        if(isOpen)
+        {
+            _inJoustMenuDoneScreen.SetActive(false);
+            _settingsScreen.SetActive(false);
+            _inJoustMenuScreen.SetActive(isOpen);
+        }
+        else
+        {
+            _inJoustMenuDoneScreen.SetActive(false);
+            _settingsScreen.SetActive(false);
+            _inJoustMenuScreen.SetActive(isOpen);
+        }
+        
+    }
+    
+    public void ToggleMenuDone(bool isOpen)
+    {
+        if(isOpen)
+        {
+            _inJoustMenuScreen.SetActive(false);
+            _settingsScreen.SetActive(false);
+            _inJoustMenuDoneScreen.SetActive(isOpen);
+        }
+        else
+        {
+            _inJoustMenuScreen.SetActive(false);
+            _settingsScreen.SetActive(false);
+            _inJoustMenuDoneScreen.SetActive(isOpen);
+        }
+        
     }
 
     public void OnStartClicked()
     {
-        ToggleMenu();
+        ToggleMenu(false);
         countdownTextObj.SetActive(true);
         StartCoroutine(_joustBehavior.CountdownToJoust());
     }

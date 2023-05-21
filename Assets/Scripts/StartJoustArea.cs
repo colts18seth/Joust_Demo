@@ -4,14 +4,13 @@ public class StartJoustArea : MonoBehaviour
 {
     [SerializeField] private GameObject startJoustText;
 
-    public bool canJoust => _canJoust;
-    private bool _canJoust = false;
+    public static bool canJoust = false;
 
     private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                _canJoust = true;
+                canJoust = true;
             }
         }
 
@@ -19,7 +18,7 @@ public class StartJoustArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _canJoust = false;
+            canJoust = false;
             startJoustText.SetActive(false);
         }
     }
