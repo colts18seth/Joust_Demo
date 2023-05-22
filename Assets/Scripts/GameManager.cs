@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> OnGameStateChanged;
     public GameState State => _state;
     private GameState _state;
+    [SerializeField] GameState _startState;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateGameState(GameState.FreeRoam);
+        UpdateGameState(_startState);
     }
 
     public void UpdateGameState(GameState gameState)

@@ -27,11 +27,8 @@ public class InGameMenuBehavior : MonoBehaviour
 
     public void ToggleMenu(bool isOpen)
     {
-        if (isOpen)
-        {
-            _inGameSettingsScreen.SetActive(false);
-            _inGameMenuScreen.SetActive(isOpen);
-        }
+        _inGameSettingsScreen.SetActive(false);
+        _inGameMenuScreen.SetActive(isOpen);
     }
 
     public void OnResumeClicked()

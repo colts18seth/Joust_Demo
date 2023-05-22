@@ -7769,6 +7769,7 @@ MonoBehaviour:
   leftHand: {fileID: 0}
   player: {fileID: 0}
   playerHead: {fileID: 0}
+  rb: {fileID: 7234546246669641390}
   _animal: {fileID: 7292029190620776182}
   MountHeight: 3.5
   IsMounted: 0
