@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class JoustBehavior : MonoBehaviour
 {
+    public EnemyBehavior EnemyBehavior;
     public GameObject _startJoustText;
     public GameManager _gameManager;
     public LanceSpawnerBehavior _lanceSpawnerBehavior;
@@ -150,6 +151,7 @@ public class JoustBehavior : MonoBehaviour
             OpenJoustMenu();
         }
         fadeBehavior.FadeIn();
+        EnemyBehavior.ResetJoustPosition();
         _hasScored = false;
     }
 

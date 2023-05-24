@@ -1,4 +1,3 @@
-using HurricaneVR.Framework.Core.Player;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -51,7 +50,8 @@ public class LanceBehavior : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // if lance hits enemy
-        if (collision.gameObject.tag.Contains("Enemy") && !_isInstantiated)
+        //if (collision.gameObject.tag.Contains("Enemy") && !_isInstantiated)
+        if (CheckNestedTag(collision.collider, "Enemy 1", "Enemy 2") && !_isInstantiated)
         {
             // get direction of enemy armor/shield and lance
             Vector3 collisionNormal = collision.contacts[0].normal;
@@ -68,18 +68,47 @@ public class LanceBehavior : MonoBehaviour
                 // break lance
                 _brokenLanceHandle.SetActive(true);
                 _brokenLanceTip.transform.parent = null;
+                _woodChips.transform.parent = null;
                 _woodChips.Play();
                 _fullLance.SetActive(false);
                 _rbLance.ResetCenterOfMass();
                 _spawner.clearDebris(_brokenLanceTip, gameObject);
-                StartCoroutine(_joustBehavior.StopTilt());
                 _isInstantiated = true;
-                _joustBehavior.AddScore(collision.gameObject.tag);
+
+                if (_joustBehavior.isJousting)
+                {
+                    StartCoroutine(_joustBehavior.StopTilt());
+                    _joustBehavior.AddScore(collision.gameObject.tag);
+                }
             }
             else
             {
                 Debug.Log("Speed: " + speed + " - Dot: " + dot);
             }
         }
+    }
+
+    // Recursive function to check nested tags
+    private bool CheckNestedTag(Collider collider, string tag1, string tag2)
+    {
+        // Check the tag of the current collider
+        if (collider.CompareTag(tag1) || collider.CompareTag(tag2))
+        {
+            return true;
+        }
+
+        // Check the tags of the colliders in the parent hierarchy
+        Transform parentTransform = collider.transform.parent;
+        if (parentTransform != null)
+        {
+            Collider parentCollider = parentTransform.GetComponent<Collider>();
+            if (parentCollider != null)
+            {
+                return CheckNestedTag(parentCollider, tag1, tag2);
+            }
+        }
+
+        // No nested tag found
+        return false;
     }
 }

@@ -8,7 +8,7 @@ public class EndJoustArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !_entered)
+        if (other.CompareTag("Player") && !_entered && JoustBehavior.isJousting)
         {
             _entered = true;
             endJoust = true;
