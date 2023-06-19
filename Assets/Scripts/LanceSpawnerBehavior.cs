@@ -24,10 +24,10 @@ public class LanceSpawnerBehavior : MonoBehaviour
         //StartCoroutine(InstantiateLance(lance));        
     }
 
-    private IEnumerator InstantiateLance(GameObject lance)
+    /*private IEnumerator InstantiateLance(GameObject lance)
     {
         yield return new WaitForSeconds(2f);
 
         Instantiate(lance, spawnPoint.transform.position, spawnPoint.transform.rotation);
-    }
+    }*/
 }

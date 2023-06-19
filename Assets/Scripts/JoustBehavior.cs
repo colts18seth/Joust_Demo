@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class JoustBehavior : MonoBehaviour
 {
-    public EnemyBehavior EnemyBehavior;
+    public EnemyHorseBehavior EnemyHorseBehavior;
     public GameObject _startJoustText;
     public GameManager _gameManager;
     public LanceSpawnerBehavior _lanceSpawnerBehavior;
@@ -36,6 +36,7 @@ public class JoustBehavior : MonoBehaviour
     private float _startJoustTimer = 0;
     private bool _hasScored = false;
     private bool _isJousting = false;
+    private bool _enemyExists;
     private GameObject[] _lances;
     //public bool _canJoust = false;
 
@@ -48,6 +49,7 @@ public class JoustBehavior : MonoBehaviour
         _tiltNumberText = tiltNumberObj.GetComponent<TextMeshProUGUI>();
         _totalScoreText = totalScoreObj.GetComponent<TextMeshProUGUI>();
         _finalScoreText = finalScoreObj.GetComponent<TextMeshProUGUI>();
+        _enemyExists = GameObject.Find("EnemyHorse");
         //canJoust = StartJoustArea.canJoust;
         //_horse = GameObject.FindGameObjectWithTag("Animal");
     }
@@ -151,7 +153,10 @@ public class JoustBehavior : MonoBehaviour
             OpenJoustMenu();
         }
         fadeBehavior.FadeIn();
-        EnemyBehavior.ResetJoustPosition();
+        if(_enemyExists)
+        {
+            EnemyHorseBehavior.ResetJoustPosition();
+        }
         _hasScored = false;
     }
 

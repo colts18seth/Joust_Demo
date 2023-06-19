@@ -36,16 +36,18 @@ public class PlayerPieceMovement : MonoBehaviour
         if (GetComponent<CapsuleCollider>().bounds.Intersects(level1Ring.GetComponent<CapsuleCollider>().bounds))
         {
             playerPieceOutline.transform.SetPositionAndRotation(dropPositionLevel1, new Quaternion(0f, 0f, 0f, 0f));
-            sceneName = "Training_Scene";
+            sceneName = "Level_Zero";
         }
-        /*if (GetComponent<CapsuleCollider>().bounds.Intersects(level2Ring.GetComponent<CapsuleCollider>().bounds))
+        if (GetComponent<CapsuleCollider>().bounds.Intersects(level2Ring.GetComponent<CapsuleCollider>().bounds))
         {
             playerPieceOutline.transform.SetPositionAndRotation(dropPositionLevel2, new Quaternion(0f, 0f, 0f, 0f));
+            sceneName = "Level_One";
         }
         if (GetComponent<CapsuleCollider>().bounds.Intersects(level3Ring.GetComponent<CapsuleCollider>().bounds))
         {
             playerPieceOutline.transform.SetPositionAndRotation(dropPositionLevel3, new Quaternion(0f, 0f, 0f, 0f));
-        }*/
+            sceneName = "Level_Two";
+        }
     }
 
     public void isGrabbed()

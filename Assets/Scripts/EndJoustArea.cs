@@ -20,7 +20,6 @@ public class EndJoustArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
             endJoust = false;
             _entered = false;
         }

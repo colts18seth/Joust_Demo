@@ -49,12 +49,18 @@ public class LanceBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        ContactPoint contact = collision.contacts[0];
+        Collider collidedSpotCollider = contact.otherCollider;
+        string collidedSpotTag = collidedSpotCollider.tag;
+        Debug.Log("Collided Spot Tag: " + collidedSpotTag);
+
         // if lance hits enemy
+        if (collidedSpotTag.Contains("Enemy") && !_isInstantiated)
         //if (collision.gameObject.tag.Contains("Enemy") && !_isInstantiated)
-        if (CheckNestedTag(collision.collider, "Enemy 1", "Enemy 2") && !_isInstantiated)
+        //if (CheckNestedTag(collision.collider, "Enemy 1", "Enemy 2") && !_isInstantiated)
         {
             // get direction of enemy armor/shield and lance
-            Vector3 collisionNormal = collision.contacts[0].normal;
+            Vector3 collisionNormal = contact.normal;
             Vector3 lanceDirection = transform.forward;
             // get angle of impact
             float dot = Vector3.Dot(collisionNormal, lanceDirection);
@@ -65,21 +71,7 @@ public class LanceBehavior : MonoBehaviour
             // if angle is straight enough and speed is fast enough
             if (Mathf.Abs(dot) >= breakDot && speed >= breakSpeed)
             {
-                // break lance
-                _brokenLanceHandle.SetActive(true);
-                _brokenLanceTip.transform.parent = null;
-                _woodChips.transform.parent = null;
-                _woodChips.Play();
-                _fullLance.SetActive(false);
-                _rbLance.ResetCenterOfMass();
-                _spawner.clearDebris(_brokenLanceTip, gameObject);
-                _isInstantiated = true;
-
-                if (_joustBehavior.isJousting)
-                {
-                    StartCoroutine(_joustBehavior.StopTilt());
-                    _joustBehavior.AddScore(collision.gameObject.tag);
-                }
+                BreakLance(collidedSpotTag);
             }
             else
             {
@@ -89,7 +81,7 @@ public class LanceBehavior : MonoBehaviour
     }
 
     // Recursive function to check nested tags
-    private bool CheckNestedTag(Collider collider, string tag1, string tag2)
+    /*private bool CheckNestedTag(Collider collider, string tag1, string tag2)
     {
         // Check the tag of the current collider
         if (collider.CompareTag(tag1) || collider.CompareTag(tag2))
@@ -110,5 +102,25 @@ public class LanceBehavior : MonoBehaviour
 
         // No nested tag found
         return false;
+    }*/
+
+    private void BreakLance(string tag)
+    {
+        // break lance
+        _brokenLanceHandle.SetActive(true);
+        _brokenLanceTip.transform.parent = null;
+        //_woodChips.transform.parent = null;
+        _woodChips.Play();
+        _fullLance.SetActive(false);
+        _rbLance.ResetCenterOfMass();
+        _spawner.clearDebris(_brokenLanceTip, gameObject);
+        _isInstantiated = true;
+
+        if (_joustBehavior.isJousting)
+        {
+            StartCoroutine(_joustBehavior.StopTilt());
+            _joustBehavior.AddScore(tag);
+            Debug.Log("Hit: " + tag);
+        }
     }
 }

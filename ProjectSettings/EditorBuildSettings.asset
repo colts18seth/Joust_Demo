@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Home.unity
     guid: eb2baf32280bee34b8807d764e309855
   - enabled: 1
-    path: Assets/Scenes/Training_Scene.unity
+    path: Assets/Scenes/Level_Zero.unity
     guid: f1786e7e96051e54f89a3129cf8fc4f3
+  - enabled: 1
+    path: Assets/Scenes/Level_One.unity
+    guid: 7dd7188bd32f8ee4387b4266cb3077b2
+  - enabled: 1
+    path: Assets/Scenes/Level_Two.unity
+    guid: b8ffa4f5d4186b3409870afd9dfd2ce9
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f2799532184a08b4682b5314d4ad2407,
       type: 2}
